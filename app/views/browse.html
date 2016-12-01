@@ -1,0 +1,25 @@
+<section class="browse-container">
+  <h3>Browse</h3>
+  <md-card class="book-card" ng-repeat="book in books">
+    <img src="{{book.coverImage}}" class="md-card-image">
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">{{book.title}}</span>
+      </md-card-title-text>
+    </md-card-title>
+    <md-card-content>
+      <p>{{book.author}}</p>
+      <p>{{book.classes}}</p>
+    </md-card-content>
+    <md-card-actions class="book-button" layout="row" layout-align="end end">
+      <span>{{book.price}}</span>
+      <span flex></span>
+      <md-button class="md-raised" ng-click="goToBookDetail(book.id)">Details</md-button>
+    </md-card-actions>
+  </md-card>
+  <div layout="row" layout-align="end end">
+    <md-button class="md-raised">Previous</md-button>
+    <span flex></span>
+    <md-button class="md-raised">Next</md-button>
+  </div>
+</section>
