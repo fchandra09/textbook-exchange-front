@@ -2,30 +2,28 @@
 
 angular.module('textbookExchangeApp')
 
-.factory('Users', function($http) {
-  var baseUrl = 'http://fa16-cs498rk-037.cs.illinois.edu:3000/api';
-
+.factory('Users', function($http, BaseApiUrl) {
   return {
     getAll: function() {
-      return $http.get(baseUrl + '/users/');
+      return $http.get(BaseApiUrl + '/users/');
     },
     get: function(id) {
-      return $http.get(baseUrl + '/users/' + id);
+      return $http.get(BaseApiUrl + '/users/' + id);
     },
     post: function(user) {
-      return $http.post(baseUrl + '/users/', user);
+      return $http.post(BaseApiUrl + '/users/', user);
     },
     put: function(id, user) {
-      return $http.put(baseUrl + '/users/' + id, user);
+      return $http.put(BaseApiUrl + '/users/' + id, user);
     },
     delete: function(id) {
-      return $http.delete(baseUrl + '/users/' + id);
+      return $http.delete(BaseApiUrl + '/users/' + id);
     },
     login: function(user) {
-      return $http.post(baseUrl + '/login', user);
+      return $http.post(BaseApiUrl + '/login', user);
     },
     register: function(user) {
-      return $http.post(baseUrl + '/signup', user);
+      return $http.post(BaseApiUrl + '/signup', user);
     }
   };
 });
