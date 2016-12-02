@@ -3,23 +3,19 @@
 angular.module('textbookExchangeApp')
 
 .factory('Books', function($http) {
-  var baseUrl = 'some/api/site';
+  var baseUrl = 'http://fa16-cs498rk-037.cs.illinois.edu:3000/api';
 
   return {
-    getAll: function() {
-      return $http.get(baseUrl + '/books/');
+    getAll: function(params) {
+      return $http.get(baseUrl + '/books/', { params: params });
     },
     get: function(id) {
-      return $http.get(baseUrl + '/books/' + id);
-    },
-    post: function(book) {
-      return $http.post(baseUrl + '/books/', book);
-    },
-    put: function(id, book) {
-      return $http.put(baseUrl + '/books/' + id, book);
-    },
-    delete: function(id) {
-      return $http.delete(baseUrl + '/books/' + id);
+      var params = {
+        where: {
+          '_id': id
+        }
+      };
+      return $http.get(baseUrl + '/books/', { params: params });
     }
   };
 });
