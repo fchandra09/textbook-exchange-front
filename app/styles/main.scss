@@ -3,6 +3,10 @@
   cursor: pointer;
 }
 
+@mixin noTextTransform {
+  text-transform: none;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -23,7 +27,38 @@ a, a:hover, a:visited {
 
 .header {
   .nav-button {
-    text-transform: none;
+    @include noTextTransform;
+  }
+}
+
+.container {
+  padding: 20px;
+
+  .browse-container {
+    .post-card {
+      font-size: 14px;
+      line-height: 1.4;
+      max-width: calc(20% - 20px);
+      margin: 10px;
+
+      .hanging-indent {
+        padding-left: 15px;
+        text-indent: -15px;
+      }
+
+      .detail-button {
+        @include noTextTransform;
+      }
+    }
+
+    .nav-row {
+      .nav-button {
+        @include noTextTransform;
+
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
   }
 }
 
