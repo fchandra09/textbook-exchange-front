@@ -2,9 +2,9 @@
 
 angular.module('textbookExchangeApp')
 
-.controller('LoginCtrl', function($location, $mdToast, $rootScope, $scope, Users) {
-  var success = function(message) {
-    $rootScope.loggedIn = true;
+.controller('LoginCtrl', function($location, $mdToast, $scope, $window, Users) {
+  var success = function(message, user) {
+    $window.localStorage.setItem('userId', user._id);
     $mdToast.show(
       $mdToast.simple()
         .textContent(message)
@@ -23,16 +23,16 @@ angular.module('textbookExchangeApp')
   };
 
   $scope.login = function() {
-    Users.login($scope.user).then(function() {
-      success('Logged in!');
+    Users.login($scope.user).then(function(response) {
+      success('Logged in!', response.data.data);
     }, function(response) {
       failure(response.data.message);
     });
   };
 
   $scope.register = function() {
-    Users.register($scope.user).then(function() {
-      success('Registered!');
+    Users.register($scope.user).then(function(response) {
+      success('Registered!', response.data.data);
     }, function(response) {
       failure(response.data.message);
     });

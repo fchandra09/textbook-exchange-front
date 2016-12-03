@@ -9,11 +9,11 @@ angular.module('textbookExchangeApp')
 
   Books.get($routeParams.bookId)
   .then(function(response) {
-    $scope.book = response.data.data[0];
+    $scope.book = response.data.data;
   });
 
   var storedData = PostData.get();
-  if (storedData) {
+  if (Object.keys(storedData).length > 0) {
     $scope.post = storedData;
   }
 
@@ -29,7 +29,7 @@ angular.module('textbookExchangeApp')
   $scope.submitPost = function() {
     var data = {
       bookId: $scope.post.bookId,
-      sellerId: $window.sessionStorage.userId,
+      sellerId: $window.localStorage.getItem('userId'),
       condition: $scope.post.condition,
       price: $scope.post.price,
       trades: Object.keys($scope.post.selectedTrades)

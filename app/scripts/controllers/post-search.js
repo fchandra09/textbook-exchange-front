@@ -8,9 +8,6 @@ angular.module('textbookExchangeApp')
 
   if ($scope.multiple) {
     var storedData = PostData.get();
-    if (!storedData) {
-      storedData = {};
-    }
   }
 
   $scope.searchBooks = function() {

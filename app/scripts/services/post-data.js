@@ -3,17 +3,16 @@
 angular.module('textbookExchangeApp')
 
 .factory('PostData', function($window) {
-  var dataCollection = {};
+  var postData = {};
 
   return {
     set: function(data) {
-      dataCollection[$window.sessionStorage.userId] = data;
+      postData = data;
     },
     get: function() {
-      var data = dataCollection[$window.sessionStorage.userId];
-      if (data) {
-        delete dataCollection[$window.sessionStorage.userId];
-      }
+      var data = postData;
+      postData = {};
+
       return data;
     }
   };

@@ -28,11 +28,11 @@
               <div class="md-toolbar-tools">
                 <div>Textbook Exchange</div>
                 <span flex></span>
-                <md-button class="nav-button">Browse</md-button>
-                <md-button class="nav-button" ng-if="$root.loggedIn" ng-click="goToView('')">Post a Book</md-button>
-                <md-button class="nav-button" ng-if="$root.loggedIn" ng-click="goToView('')">My Account</md-button>
-                <md-button class="nav-button" ng-if="$root.loggedIn" ng-click="goToView('logout')">Logout</md-button>
-                <md-button class="nav-button" ng-if="!$root.loggedIn" ng-click="goToView('login')">Register/Login</md-button>
+                <md-button class="nav-button" ng-click="goToView('browse')">Browse</md-button>
+                <md-button class="nav-button" ng-if="$root.loggedIn()" ng-click="goToView('post-search')">Post a Book</md-button>
+                <md-button class="nav-button" ng-if="$root.loggedIn()" ng-click="goToView('')">My Account</md-button>
+                <md-button class="nav-button" ng-if="$root.loggedIn()" ng-click="goToView('logout')">Logout</md-button>
+                <md-button class="nav-button" ng-if="!$root.loggedIn()" ng-click="goToView('login')">Register/Login</md-button>
               </div>
             </md-toolbar>
         </section>

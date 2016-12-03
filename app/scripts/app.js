@@ -48,8 +48,11 @@ angular
         redirectTo: '/browse'
       });
   })
-  .run(function($location, $rootScope) {
-    $rootScope.loggedIn = false;
+  .run(function($location, $rootScope, $window) {
+    $rootScope.loggedIn = function() {
+      var userId = $window.localStorage.getItem('userId');
+      return (userId ? true : false);
+    };
     $rootScope.goToView = function(view) {
       $location.path(view);
     };
