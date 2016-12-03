@@ -1,25 +1,44 @@
 <section class="browse-container">
-  <h3>Browse</h3>
+  <h2>Browse</h2>
+  <div layout="row" layout-align="end end">
+    <md-input-container>
+      <label>Search</label>
+      <input ng-model="searchQuery">
+    </md-input-container>
+    <span flex></span>
+    <md-select ng-model="sortBy" placeholder="Sort By:" class="md-no-underline">
+      <md-option value="1">Price: Low to High</md-option>
+      <md-option value="2">Price: High to Low</md-option>
+      <md-option value="3">Author: A to Z</md-option>
+      <md-option value="4">Author: Z to A</md-option>
+      <md-option value="5">Title: A to Z</md-option>
+      <md-option value="6">Title: Z to A</md-option>
+    </md-select>
+    <md-select ng-model="classFilter" placeholder="Class:" class="md-no-underline">
+      <md-option value="some class">Some Class</md-option>
+    </md-select>
+  </div>
   <md-card class="post-card" ng-repeat="post in posts">
-    <img src="{{post.coverImage}}" class="md-card-image">
+    <img src="{{post.book.coverImage}}" class="md-card-image">
     <md-card-title>
       <md-card-title-text>
         <span class="md-headline">{{post.book.title}}</span>
       </md-card-title-text>
     </md-card-title>
     <md-card-content>
-      <p>{{post.book.authors}}</p>
-      <p>{{post.book.condition}}</p>
+      <p class="hanging-indent">Authors: <span ng-repeat="author in post.book.authors">{{author}}<span ng-if="!$last">, </span></span></p>
+      <p class="hanging-indent">Classes: <span ng-repeat="class in post.book.classes">{{class}}<span ng-if="!$last">, </span></span></p>
+      <p class="hanging-indent">Condition: {{post.condition}}</p>
     </md-card-content>
     <md-card-actions class="post-button" layout="row" layout-align="end end">
-      <span>{{post.price}}</span>
+      <span class="md-title">{{post.price | currency}}</span>
       <span flex></span>
-      <md-button class="md-raised" ng-click="goToBookDetail(post.id)">Details</md-button>
+      <md-button class="md-raised md-primary detail-button" ng-click="goToBookDetail(post.id)">Details</md-button>
     </md-card-actions>
   </md-card>
-  <div layout="row" layout-align="end end">
-    <md-button class="md-raised">Previous</md-button>
+  <div class="nav-row" layout="row" layout-align="end end">
+    <md-button class="md-raised nav-button">Previous</md-button>
     <span flex></span>
-    <md-button class="md-raised">Next</md-button>
+    <md-button class="md-raised nav-button">Next</md-button>
   </div>
 </section>
