@@ -1,0 +1,56 @@
+<section class="post-container">
+  <h3>Post a Book</h3>
+
+  <md-card class="book-card" layout="row">
+    <div flex="none" layout="column" layout-align="center center" class="cover-image-container">
+      <img src="images/books/{{book.isbn}}.jpg" class="md-card-image flex-image">
+    </div>
+    <div flex="grow" layout="column">
+      <md-card-title flex="none">
+        <md-card-title-text>
+          <span class="md-headline">{{book.title}}</span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content flex="grow">
+        <p>{{book.authors}}</p>
+        <p>{{book.isbn}}</p>
+        <p>{{book.courses.join(', ')}}</p>
+      </md-card-content>
+    </div>
+  </md-card>
+
+  <div layout="row">
+    <div flex="100" flex-gt-sm="50" layout="column">
+      <md-input-container>
+        <label for="condition">Condition</label>
+        <md-select id="condition" ng-model="post.condition">
+          <md-option value="New">New</md-option>
+          <md-option value="Looks Like New">Looks Like New</md-option>
+          <md-option value="Used / Fair">Used / Fair</md-option>
+          <md-option value="Worn">Worn</md-option>
+        </md-select>
+      </md-input-container>
+      <md-input-container>
+        <label for="price">Price</label>
+        <input type="number" id="price" ng-model="post.price" step="1" min="0" />
+      </md-input-container>
+      <span>Trade</span>
+      <div layout="row">
+        <md-list class="list" flex="grow">
+          <md-list-item class="list-item" ng-repeat="tradeBook in post.selectedTrades">
+            <div flex="grow">{{tradeBook.title}}</div>
+            <div flex>
+              <md-icon class="column" ng-click="removeSelectedBook(tradeBook._id)" md-font-library="material-icons">delete</md-icon>
+            </div>
+          </md-list-item>
+        </md-list>
+        <div flex="none">
+          <md-button class="md-raised" ng-click="searchBooksToTrade()">Search</md-button>
+        </div>
+      </div>
+      <div layout="row" layout-align="center">
+        <md-button class="md-raised" ng-click="submitPost()">Post</md-button>
+      </div>
+    </div>
+  </div>
+</section>
