@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Textbook Exchange</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -21,34 +21,38 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="header">
-      <div class="navbar navbar-default" role="navigation">
+    <div id="site-wrapper">
+        <section class="header">
+            <md-toolbar class="md-hue-2">
+              <div class="md-toolbar-tools">
+                <div>Textbook Exchange</div>
+                <span flex></span>
+                <md-button class="nav-button">Browse</md-button>
+                <md-button class="nav-button" ng-if="$root.loggedIn" ng-click="goToView('')">Post a Book</md-button>
+                <md-button class="nav-button" ng-if="$root.loggedIn" ng-click="goToView('')">My Account</md-button>
+                <md-button class="nav-button" ng-if="$root.loggedIn" ng-click="goToView('logout')">Logout</md-button>
+                <md-button class="nav-button" ng-if="!$root.loggedIn" ng-click="goToView('login')">Register/Login</md-button>
+              </div>
+            </md-toolbar>
+        </section>
+
         <div class="container">
-          <div class="navbar-header">
+            <div ng-view=""></div>
+        </div>
 
-            <a class="navbar-brand" href="#/">textbookExchange</a>
+        <div class="footer" layout="row" layout-align="end end"  md-colors="::{backgroundColor: 'default-primary-700'}">
+          <div>
+            <div><a>About</a></div>
+            <div><a>Help</a></div>
+            <div><a>FAQ</a></div>
           </div>
-
-          <div class="collapse">
-
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="#/">Home</a></li>
-              <li><a ng-href="#/about">About</a></li>
-              <li><a ng-href="#/">Contact</a></li>
-            </ul>
+          <span flex></span>
+          <div>
+            <h3>Contact Us</h3>
+            <div>Textbook Exchange</div>
+            <div>email@email.com</div>
           </div>
         </div>
-      </div>
-    </div>
-
-    <div class="container">
-    <div ng-view=""></div>
-    </div>
-
-    <div class="footer">
-      <div class="container">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
-      </div>
     </div>
 
 

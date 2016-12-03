@@ -1,13 +1,5 @@
 'use strict';
 
-/**
- * @ngdoc overview
- * @name textbookExchangeApp
- * @description
- * # textbookExchangeApp
- *
- * Main module of the application.
- */
 angular
   .module('textbookExchangeApp', [
     'ngAnimate',
@@ -29,4 +21,10 @@ angular
       .otherwise({
         redirectTo: '/'
       });
+  })
+  .run(function($location, $rootScope) {
+    $rootScope.loggedIn = false;
+    $rootScope.goToView = function(view) {
+      $location.path(view);
+    };
   });
