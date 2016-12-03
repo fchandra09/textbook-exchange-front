@@ -13,12 +13,16 @@ angular
   ])
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/', {
+      .when('/browse', {
         templateUrl: 'views/browse.html',
         controller: 'BrowseCtrl'
       })
+      .when('/login', {
+        templateUrl: 'views/login.html',
+        controller: 'LoginCtrl'
+      })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/browse'
       });
   })
   .run(function($location, $rootScope) {

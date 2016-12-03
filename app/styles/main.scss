@@ -60,6 +60,13 @@ a, a:hover, a:visited {
       }
     }
   }
+
+  .login-container {
+    .login-card {
+      margin: 0 auto;
+      max-width: 500px;
+    }
+  }
 }
 
 .footer {
