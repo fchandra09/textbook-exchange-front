@@ -1,0 +1,23 @@
+<section class="login-container">
+  <md-card class="login-card">
+    <md-card-title>
+      <span class="md-headline">Register/Login</span>
+    </md-card-title>
+    <md-card-content>
+      <form name="loginForm">
+        <md-input-container class="md-block">
+          <label>Email</label>
+          <input ng-model="user.email" name="email">
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>Password</label>
+          <input ng-model="user.password" name="password">
+        </md-input-container>
+      </form>
+    </md-card-content>
+    <md-card-actions layout="row" layout-align="end center">
+      <md-button class="md-primary">Register</md-button>
+      <md-button class="md-primary">Login</md-button>
+    </md-card-actions>
+  </md-card>
+</section>

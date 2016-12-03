@@ -3,7 +3,7 @@
 angular.module('textbookExchangeApp')
 
 .factory('Users', function($http) {
-  var baseUrl = 'some/api/site';
+  var baseUrl = 'http://fa16-cs498rk-037.cs.illinois.edu:3000/api';
 
   return {
     getAll: function() {
@@ -20,6 +20,12 @@ angular.module('textbookExchangeApp')
     },
     delete: function(id) {
       return $http.delete(baseUrl + '/users/' + id);
+    },
+    login: function(user) {
+      return $http.post(baseUrl + '/login', user);
+    },
+    register: function(user) {
+      return $http.post(baseUrl + '/signup', user);
     }
   };
 });
