@@ -19,15 +19,15 @@
     </md-select>
   </div>
   <md-card class="post-card" ng-repeat="post in posts">
-    <img src="{{post.book.coverImage}}" class="md-card-image">
+    <img src="images/books/{{post.book.isbn}}.jpg" class="md-card-image">
     <md-card-title>
       <md-card-title-text>
         <span class="md-headline">{{post.book.title}}</span>
       </md-card-title-text>
     </md-card-title>
     <md-card-content>
-      <p class="hanging-indent">Authors: <span ng-repeat="author in post.book.authors">{{author}}<span ng-if="!$last">, </span></span></p>
-      <p class="hanging-indent">Classes: <span ng-repeat="class in post.book.classes">{{class}}<span ng-if="!$last">, </span></span></p>
+      <p class="hanging-indent">Authors: {{post.book.authors}}</p>
+      <p class="hanging-indent">Classes: <span ng-repeat="course in post.book.courses">{{course}}<span ng-if="!$last">, </span></span></p>
       <p class="hanging-indent">Condition: {{post.condition}}</p>
     </md-card-content>
     <md-card-actions class="post-button" layout="row" layout-align="end end">

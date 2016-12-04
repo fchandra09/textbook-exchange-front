@@ -4,8 +4,8 @@ angular.module('textbookExchangeApp')
 
 .factory('Posts', function($http, BaseApiUrl) {
   return {
-    getAll: function() {
-      return $http.get(BaseApiUrl + '/posts/');
+    getAll: function(params) {
+      return $http.get(BaseApiUrl + '/posts/', { params: params });
     },
     get: function(id) {
       return $http.get(BaseApiUrl + '/posts/' + id);

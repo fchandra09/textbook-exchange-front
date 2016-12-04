@@ -6,8 +6,9 @@ angular.module('textbookExchangeApp')
   $scope.multiple = extraParams.multiple;
   $scope.filter = {};
 
+  var storedData;
   if ($scope.multiple) {
-    var storedData = PostData.get();
+    storedData = PostData.get();
   }
 
   $scope.searchBooks = function() {

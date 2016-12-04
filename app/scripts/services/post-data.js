@@ -2,7 +2,7 @@
 
 angular.module('textbookExchangeApp')
 
-.factory('PostData', function($window) {
+.factory('PostData', function() {
   var postData = {};
 
   return {
