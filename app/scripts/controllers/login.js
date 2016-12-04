@@ -22,6 +22,16 @@ angular.module('textbookExchangeApp')
     );
   };
 
+  $scope.showLogin = true;
+
+  $scope.goToRegister = function() {
+    $scope.showLogin = false;
+  };
+
+  $scope.goToLogin = function() {
+    $scope.showLogin = true;
+  };
+
   $scope.login = function() {
     Users.login($scope.user).then(function(response) {
       success('Logged in!', response.data.data);
