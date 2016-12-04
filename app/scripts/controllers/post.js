@@ -37,11 +37,11 @@ angular.module('textbookExchangeApp')
 
     Posts.post(data)
     .success(function() {
-      // Display success message
+      // TODO: Display success message
       $location.path('/');
     })
     .error(function() {
-      // Display error message
+      // TODO: Display error message
     });
   };
 });

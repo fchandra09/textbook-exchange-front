@@ -44,6 +44,10 @@ angular
         templateUrl: 'views/post.html',
         controller: 'PostCtrl'
       })
+      .when('/view/:postId', {
+        templateUrl: 'views/view.html',
+        controller: 'ViewCtrl'
+      })
       .otherwise({
         redirectTo: '/browse'
       });

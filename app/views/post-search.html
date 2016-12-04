@@ -46,9 +46,9 @@
         </md-card-title-text>
       </md-card-title>
       <md-card-content flex="grow">
-        <p>{{book.authors}}</p>
-        <p>{{book.isbn}}</p>
-        <p>{{book.courses.join(', ')}}</p>
+        <p>Authors: {{book.authors}}</p>
+        <p>ISBN: {{book.isbn}}</p>
+        <p>Classes: {{book.courses.join(', ')}}</p>
       </md-card-content>
       <md-card-actions class="book-button" layout="row" layout-align="end end" flex="none">
         <md-button class="md-raised" ng-click="selectBook(book._id, book.title)">Select</md-button>

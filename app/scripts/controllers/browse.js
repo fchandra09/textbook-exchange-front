@@ -2,7 +2,7 @@
 
 angular.module('textbookExchangeApp')
 
-.controller('BrowseCtrl', function($scope, Posts, Books) {
+.controller('BrowseCtrl', function($scope, $location, Posts, Books) {
   var page = 1;
   var limit = 20;
 
@@ -15,4 +15,8 @@ angular.module('textbookExchangeApp')
       });
     });
   });
+
+  $scope.goToBookDetail = function(postId) {
+    $location.path('/view/' + postId);
+  };
 });
