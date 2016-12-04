@@ -22,6 +22,10 @@ angular.module('textbookExchangeApp')
     );
   };
 
+  if ($window.localStorage.getItem('userId')) {
+    $location.path('/browse');
+  }
+
   $scope.showLogin = true;
   $scope.user = {};
 
