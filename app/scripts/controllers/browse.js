@@ -9,8 +9,8 @@ angular.module('textbookExchangeApp')
   var getPosts = function() {
     Posts.getAll({'limit': limit, 'skip': (page - 1) * limit}).then(function(response) {
       // If API goes past the last page, go back
-      if (response.data.data === 0) {
-        page -= 2;
+      if (response.data.data.length === 0) {
+        page -= 1;
         getPosts();
         return;
       }
@@ -30,6 +30,8 @@ angular.module('textbookExchangeApp')
       );
     });
   };
+
+  getPosts();
 
   $scope.goToBookDetail = function(postId) {
     $location.path('/view/' + postId);
