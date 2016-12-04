@@ -23,6 +23,7 @@ angular.module('textbookExchangeApp')
   };
 
   $scope.showLogin = true;
+  $scope.user = {};
 
   $scope.goToRegister = function() {
     $scope.showLogin = false;
@@ -33,18 +34,32 @@ angular.module('textbookExchangeApp')
   };
 
   $scope.login = function() {
-    Users.login($scope.user).then(function(response) {
-      success('Logged in!', response.data.data);
-    }, function(response) {
-      failure(response.data.message);
-    });
+    if (!$scope.user.email) {
+      failure('Email is required');
+    } else if (!$scope.user.password) {
+      failure('Password is required!');
+    } else {
+      Users.login($scope.user).then(function(response) {
+        success('Logged in!', response.data.data);
+      }, function(response) {
+        failure(response.data.message);
+      });
+    }
   };
 
   $scope.register = function() {
-    Users.register($scope.user).then(function(response) {
-      success('Registered!', response.data.data);
-    }, function(response) {
-      failure(response.data.message);
-    });
+    if (!$scope.user.email) {
+      failure('Email is required');
+    } else if (!$scope.user.password) {
+      failure('Password is required!');
+    } else if (!$scope.name.name) {
+      failure('Name is requried');
+    } else {
+      Users.register($scope.user).then(function(response) {
+        success('Registered!', response.data.data);
+      }, function(response) {
+        failure(response.data.message);
+      });
+    }
   };
 });
