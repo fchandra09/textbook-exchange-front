@@ -3,6 +3,10 @@
 angular.module('textbookExchangeApp')
 
 .controller('PostCtrl', function($scope, $routeParams, $location, $window, Books, Posts, PostData) {
+  if (!$window.localStorage.getItem('userId')) {
+    $location.path('/browse');
+  }
+
   $scope.post = {
     bookId: $routeParams.bookId
   };

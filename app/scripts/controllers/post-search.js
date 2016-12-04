@@ -2,9 +2,13 @@
 
 angular.module('textbookExchangeApp')
 
-.controller('PostSearchCtrl', function($scope, $location, Books, PostData, extraParams) {
+.controller('PostSearchCtrl', function($scope, $location, $window, Books, PostData, extraParams) {
   $scope.multiple = extraParams.multiple;
   $scope.filter = {};
+
+  if (!$window.localStorage.getItem('userId')) {
+    $location.path('/browse');
+  }
 
   var storedData;
   if ($scope.multiple) {
