@@ -48,6 +48,10 @@ angular
         templateUrl: 'views/view.html',
         controller: 'ViewCtrl'
       })
+      .when('/edit-post/:postId', {
+        templateUrl: 'views/post.html',
+        controller: 'EditPostCtrl'
+      })
       .when('/account', {
         templateUrl: 'views/account.html',
         controller: 'AccountCtrl'

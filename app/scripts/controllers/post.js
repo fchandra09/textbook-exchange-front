@@ -8,7 +8,9 @@ angular.module('textbookExchangeApp')
   }
 
   $scope.post = {
-    bookId: $routeParams.bookId
+    bookId: $routeParams.bookId,
+    existing: false,
+    selectedTrades: {}
   };
 
   Books.get($routeParams.bookId)
@@ -42,7 +44,7 @@ angular.module('textbookExchangeApp')
     Posts.post(data)
     .success(function() {
       // TODO: Display success message
-      $location.path('/');
+      $location.path('/account');
     })
     .error(function() {
       // TODO: Display error message
