@@ -1,12 +1,6 @@
 // Generated on 2016-11-28 using generator-angular 0.15.1
 'use strict';
 
-// # Globbing
-// for performance reasons we're only matching one level down:
-// 'test/spec/{,*/}*.js'
-// use this if you want to recursively match all subfolders:
-// 'test/spec/**/*.js'
-
 module.exports = function (grunt) {
 
   // Time how long tasks take. Can help when optimizing build times
@@ -39,14 +33,9 @@ module.exports = function (grunt) {
       },
       js: {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
-        tasks: ['newer:jshint:all', 'newer:jscs:all'],
         options: {
           livereload: '<%= connect.options.livereload %>'
         }
-      },
-      jsTest: {
-        files: ['test/spec/{,*/}*.js'],
-        tasks: ['newer:jshint:test', 'newer:jscs:test', 'karma']
       },
       compass: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
@@ -93,64 +82,11 @@ module.exports = function (grunt) {
           }
         }
       },
-      test: {
-        options: {
-          port: 9001,
-          middleware: function (connect) {
-            return [
-              connect.static('.tmp'),
-              connect.static('test'),
-              connect().use(
-                '/bower_components',
-                connect.static('./bower_components')
-              ),
-              connect.static(appConfig.app)
-            ];
-          }
-        }
-      },
       dist: {
         options: {
           open: true,
           base: '<%= yeoman.dist %>'
         }
-      }
-    },
-
-    // Make sure there are no obvious mistakes
-    jshint: {
-      options: {
-        jshintrc: '.jshintrc',
-        reporter: require('jshint-stylish')
-      },
-      all: {
-        src: [
-          'Gruntfile.js',
-          '<%= yeoman.app %>/scripts/{,*/}*.js'
-        ]
-      },
-      test: {
-        options: {
-          jshintrc: 'test/.jshintrc'
-        },
-        src: ['test/spec/{,*/}*.js']
-      }
-    },
-
-    // Make sure code styles are up to par
-    jscs: {
-      options: {
-        config: '.jscsrc',
-        verbose: true
-      },
-      all: {
-        src: [
-          'Gruntfile.js',
-          '<%= yeoman.app %>/scripts/{,*/}*.js'
-        ]
-      },
-      test: {
-        src: ['test/spec/{,*/}*.js']
       }
     },
 
@@ -202,22 +138,6 @@ module.exports = function (grunt) {
       app: {
         src: ['<%= yeoman.app %>/index.html'],
         ignorePath:  /\.\.\//
-      },
-      test: {
-        devDependencies: true,
-        src: '<%= karma.unit.configFile %>',
-        ignorePath:  /\.\.\//,
-        fileTypes:{
-          js: {
-            block: /(([\s\t]*)\/{2}\s*?bower:\s*?(\S*))(\n|\r|.)*?(\/{2}\s*endbower)/gi,
-              detect: {
-                js: /'(.*\.js)'/gi
-              },
-              replace: {
-                js: '\'{{filePath}}\','
-              }
-            }
-          }
       },
       sass: {
         src: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
@@ -434,22 +354,11 @@ module.exports = function (grunt) {
       server: [
         'compass:server'
       ],
-      test: [
-        'compass'
-      ],
       dist: [
         'compass:dist',
         'imagemin',
         'svgmin'
       ]
-    },
-
-    // Test settings
-    karma: {
-      unit: {
-        configFile: 'test/karma.conf.js',
-        singleRun: true
-      }
     }
   });
 
@@ -474,15 +383,6 @@ module.exports = function (grunt) {
     grunt.task.run(['serve:' + target]);
   });
 
-  grunt.registerTask('test', [
-    'clean:server',
-    'wiredep',
-    'concurrent:test',
-    'postcss',
-    'connect:test',
-    'karma'
-  ]);
-
   grunt.registerTask('build', [
     'clean:dist',
     'wiredep',
@@ -502,9 +402,6 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('default', [
-    'newer:jshint',
-    'newer:jscs',
-    'test',
-    'build'
+    'serve'
   ]);
 };
