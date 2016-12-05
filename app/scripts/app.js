@@ -52,12 +52,19 @@ angular
         redirectTo: '/browse'
       });
   })
-  .run(function($location, $rootScope, $window) {
+  .run(function($location, $rootScope, $window, Users) {
     $rootScope.loggedIn = function() {
       var userId = $window.localStorage.getItem('userId');
       return (userId ? true : false);
     };
     $rootScope.goToView = function(view) {
       $location.path(view);
+    };
+    $rootScope.logout = function() {
+      Users.logout()
+      .then(function() {
+        $window.localStorage.removeItem('userId');
+        $location.path('/browse');
+      });
     };
   });

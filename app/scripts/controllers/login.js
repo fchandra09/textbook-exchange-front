@@ -56,7 +56,7 @@ angular.module('textbookExchangeApp')
       failure('Email is required');
     } else if (!$scope.user.password) {
       failure('Password is required!');
-    } else if (!$scope.name.name) {
+    } else if (!$scope.user.name) {
       failure('Name is requried');
     } else {
       Users.register($scope.user).then(function(response) {

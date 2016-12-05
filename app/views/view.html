@@ -60,10 +60,10 @@
     </md-input-container>
   </md-input-container>
 
-  <div layout="row" layout-align="center" flex="100" flex-gt-sm="75" flex-gt-md="50">
+  <div layout="row" layout-align="center">
     <md-button ng-show="isSeller && post.active" class="md-raised md-primary md-button md-ink-ripple" ng-click="markAsSold()">Mark as Sold</md-button>
     <md-button ng-show="isSeller" class="md-raised md-primary md-button md-ink-ripple" ng-click="editPost()">Edit</md-button>
     <md-button ng-show="isSeller" class="md-raised md-warn md-hue-2 md-button md-ink-ripple" ng-click="deletePost()">Delete</md-button>
-    <md-button ng-show="isBuyer" class="md-raised md-primary md-button md-ink-ripple" ng-click="contactSeller()">Contact Seller</md-button>
+    <md-button ng-show="isPotentialBuyer && post.active" class="md-raised md-primary md-button md-ink-ripple" ng-click="contactSeller()">Contact Seller</md-button>
   </div>
 </section>
