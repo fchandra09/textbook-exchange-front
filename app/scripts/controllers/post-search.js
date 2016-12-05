@@ -99,7 +99,12 @@ angular.module('textbookExchangeApp')
       storedData.selectedTrades = $scope.selectedTrades;
       PostData.set(storedData);
 
-      $location.path('/post/' + storedData.bookId);
+      if (storedData.existing) {
+        $location.path('/edit-post/' + storedData._id);
+      }
+      else {
+        $location.path('/post/' + storedData.bookId);
+      }
     };
   }
   else {

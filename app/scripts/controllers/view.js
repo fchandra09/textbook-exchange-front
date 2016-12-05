@@ -51,7 +51,7 @@ angular.module('textbookExchangeApp')
       Posts.delete($routeParams.postId)
       .then(function() {
         // TODO: Display success message
-        $location.path('/');
+        $location.path('/account');
       });
     }
   };
