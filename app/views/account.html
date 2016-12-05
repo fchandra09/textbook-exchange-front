@@ -1,0 +1,51 @@
+<section class="account-container">
+  <md-card class="edit-account-card">
+    <md-card-title>
+      <span class="md-headline">Edit Account Details</span>
+    </md-card-title>
+    <md-card-content>
+      <form name="loginForm">
+        <md-input-container class="md-block" ng-if="!showLogin">
+          <label>Name</label>
+          <input ng-model="user.name" name="name">
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>Email</label>
+          <input ng-model="user.email" name="email">
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>New Password</label>
+          <input ng-model="user.newPassword" name="newPassword" type="password">
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>Confirm New Password</label>
+          <input ng-model="user.confirmNewPassword" name="confirmNewPassword" type="password">
+        </md-input-container>
+      </form>
+    </md-card-content>
+    <md-card-actions layout="row" layout-align="end center">
+      <span flex></span>
+      <md-button class="md-primary" ng-click="updateAccount()">Update Account</md-button>
+    </md-card-actions>
+  </md-card>
+
+  <h3 class="posts-header">My Posts</h3>
+  <md-card class="post-card" ng-repeat="post in posts">
+    <img src="images/books/{{post.book.isbn}}.jpg" class="md-card-image post-book-image">
+    <md-card-title>
+      <md-card-title-text>
+        <span class="post-book-title">{{post.book.title}}</span>
+      </md-card-title-text>
+    </md-card-title>
+    <md-card-content>
+      <p class="hanging-indent">Authors: {{post.book.authors}}</p>
+      <p class="hanging-indent">Classes: <span ng-repeat="course in post.book.courses">{{course}}<span ng-if="!$last">, </span></span></p>
+      <p class="hanging-indent">Condition: {{post.condition}}</p>
+    </md-card-content>
+    <md-card-actions class="post-button" layout="row" layout-align="end end">
+      <span class="md-title">{{post.price | currency}}</span>
+      <span flex></span>
+      <md-button class="md-raised md-primary detail-button" ng-click="goToBookDetail(post._id)">Details</md-button>
+    </md-card-actions>
+  </md-card>
+</section>

@@ -30,7 +30,7 @@
                 <span flex></span>
                 <md-button class="nav-button" ng-click="goToView('browse')">Browse</md-button>
                 <md-button class="nav-button" ng-if="$root.loggedIn()" ng-click="goToView('post-search')">Post a Book</md-button>
-                <md-button class="nav-button" ng-if="$root.loggedIn()" ng-click="goToView('')">My Account</md-button>
+                <md-button class="nav-button" ng-if="$root.loggedIn()" ng-click="goToView('account')">My Account</md-button>
                 <md-button class="nav-button" ng-if="$root.loggedIn()" ng-click="logout()">Logout</md-button>
                 <md-button class="nav-button" ng-if="!$root.loggedIn()" ng-click="goToView('login')">Register/Login</md-button>
               </div>
@@ -73,6 +73,7 @@
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/account.js"></script>
     <script src="scripts/controllers/browse.js"></script>
     <script src="scripts/controllers/login.js"></script>
     <script src="scripts/controllers/post.js"></script>
