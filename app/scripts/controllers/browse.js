@@ -3,20 +3,32 @@
 angular.module('textbookExchangeApp')
 
 .controller('BrowseCtrl', function($scope, $location, $mdToast, Posts, Books) {
-  var page = 1;
   var limit = 20;
+  $scope.page = 1;
+  $scope.sortBy = '1';
+  $scope.searchQuery = '';
 
   var getPosts = function() {
+    var sort = {};
+    switch ($scope.sortBy) {
+      case "1":
+        sort = { price: 1 };
+        break;
+      case "2":
+        sort = { price: -1 };
+    }
+
     Posts.getAll({
       limit: limit,
-      skip: (page - 1) * limit,
+      skip: ($scope.page - 1) * limit,
       where: {
         active: true
-      }
+      },
+      sort: sort
     }).then(function(response) {
       // If API goes past the last page, go back
       if (response.data.data.length === 0) {
-        page -= 1;
+        $scope.page -= 1;
         getPosts();
         return;
       }
@@ -44,16 +56,21 @@ angular.module('textbookExchangeApp')
   };
 
   $scope.previousPage = function() {
-    page--;
-    if (page < 0) {
-      page = 0;
+    $scope.page--;
+    if ($scope.page < 1) {
+      $scope.page = 1;
     }
 
     getPosts();
   };
 
   $scope.nextPage = function() {
-    page++;
+    $scope.page++;
+    getPosts();
+  };
+
+  $scope.refreshPost = function() {
+    $scope.page = 1;
     getPosts();
   };
 });

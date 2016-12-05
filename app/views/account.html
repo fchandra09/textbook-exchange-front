@@ -41,6 +41,7 @@
       <p class="hanging-indent">Authors: {{post.book.authors}}</p>
       <p class="hanging-indent">Classes: <span ng-repeat="course in post.book.courses">{{course}}<span ng-if="!$last">, </span></span></p>
       <p class="hanging-indent">Condition: {{post.condition}}</p>
+      <p class="hanging-indent">Status: {{post.active ? 'Unsold' : 'Sold'}}</p>
     </md-card-content>
     <md-card-actions class="post-button" layout="row" layout-align="end end">
       <span class="md-title">{{post.price | currency}}</span>

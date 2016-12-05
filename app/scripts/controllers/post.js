@@ -2,7 +2,7 @@
 
 angular.module('textbookExchangeApp')
 
-.controller('PostCtrl', function($scope, $routeParams, $location, $window, Books, Posts, PostData) {
+.controller('PostCtrl', function($scope, $routeParams, $location, $window, $mdToast, Books, Posts, PostData) {
   if (!$window.localStorage.getItem('userId')) {
     $location.path('/browse');
   }
@@ -42,12 +42,13 @@ angular.module('textbookExchangeApp')
     };
 
     Posts.post(data)
-    .success(function() {
-      // TODO: Display success message
-      $location.path('/account');
-    })
-    .error(function() {
-      // TODO: Display error message
+    .success(function(response) {
+      $mdToast.show(
+        $mdToast.simple()
+          .textContent("Your post has been created.")
+          .hideDelay(2500)
+      );
+      $location.path('/view/' + response.data._id);
     });
   };
 });

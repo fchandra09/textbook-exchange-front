@@ -1,22 +1,17 @@
 <section class="browse-container">
   <h2>Browse</h2>
-  <div layout="row" layout-align="end end">
-    <md-input-container>
+  <div layout="row" layout-align="space-between">
+    <md-input-container flex="100" flex-gt-sm="45" flex-gt-md="30">
       <label>Search</label>
-      <input ng-model="searchQuery">
+      <input ng-model="searchQuery" />
     </md-input-container>
-    <span flex></span>
-    <md-select ng-model="sortBy" placeholder="Sort By:" class="md-no-underline">
-      <md-option value="1">Price: Low to High</md-option>
-      <md-option value="2">Price: High to Low</md-option>
-      <md-option value="3">Author: A to Z</md-option>
-      <md-option value="4">Author: Z to A</md-option>
-      <md-option value="5">Title: A to Z</md-option>
-      <md-option value="6">Title: Z to A</md-option>
-    </md-select>
-    <md-select ng-model="classFilter" placeholder="Class:" class="md-no-underline">
-      <md-option value="some class">Some Class</md-option>
-    </md-select>
+    <md-input-container flex="100" flex-gt-sm="45" flex-gt-md="30">
+      <label>Sort By</label>
+      <md-select ng-model="sortBy" ng-change="refreshPost()">
+        <md-option value="1">Price: Low to High</md-option>
+        <md-option value="2">Price: High to Low</md-option>
+      </md-select>
+    </md-input-container>
   </div>
   <md-card class="post-card" ng-repeat="post in posts">
     <img src="images/books/{{post.book.image || 'not-available.jpg'}}" class="md-card-image post-book-image">
@@ -37,7 +32,7 @@
     </md-card-actions>
   </md-card>
   <div class="nav-row" layout="row" layout-align="end end">
-    <md-button class="md-raised nav-button" ng-click="previousPage()">Previous</md-button>
+    <md-button class="md-raised nav-button" ng-click="previousPage()" ng-disabled="page === 1">Previous</md-button>
     <span flex></span>
     <md-button class="md-raised nav-button" ng-click="nextPage()">Next</md-button>
   </div>

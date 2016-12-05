@@ -2,7 +2,7 @@
 
 angular.module('textbookExchangeApp')
 
-.controller('ViewCtrl', function($scope, $routeParams, $rootScope, $location, $window, Posts, Books, Users) {
+.controller('ViewCtrl', function($scope, $routeParams, $rootScope, $location, $window, $mdToast, Posts, Books, Users) {
   $scope.displaySellerInfo = false;
 
   Posts.get($routeParams.postId)
@@ -50,7 +50,11 @@ angular.module('textbookExchangeApp')
     if ($window.confirm('Are you sure you want to delete this post?')) {
       Posts.delete($routeParams.postId)
       .then(function() {
-        // TODO: Display success message
+        $mdToast.show(
+          $mdToast.simple()
+            .textContent("Your post has been deleted.")
+            .hideDelay(2500)
+        );
         $location.path('/account');
       });
     }
@@ -62,7 +66,11 @@ angular.module('textbookExchangeApp')
 
     Posts.put($routeParams.postId, newPost)
     .then(function() {
-      // TODO: Display success message
+      $mdToast.show(
+        $mdToast.simple()
+          .textContent("Your post has been marked as sold.")
+          .hideDelay(2500)
+      );
       $scope.post = newPost;
     });
   };

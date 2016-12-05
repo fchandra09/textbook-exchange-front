@@ -2,7 +2,7 @@
 
 angular.module('textbookExchangeApp')
 
-.controller('EditPostCtrl', function($scope, $routeParams, $location, $window, $q, Books, Posts, PostData) {
+.controller('EditPostCtrl', function($scope, $routeParams, $location, $window, $q, $mdToast, Books, Posts, PostData) {
   if (!$window.localStorage.getItem('userId')) {
     $location.path('/browse');
   }
@@ -59,11 +59,12 @@ angular.module('textbookExchangeApp')
 
     Posts.put($routeParams.postId, $scope.post)
       .success(function() {
-        // TODO: Display success message
-        $location.path('/account');
-      })
-      .error(function() {
-        // TODO: Display error message
+        $mdToast.show(
+          $mdToast.simple()
+            .textContent("Your post has been updated.")
+            .hideDelay(2500)
+        );
+        $location.path('/view/' + $routeParams.postId);
       });
   };
 });
