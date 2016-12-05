@@ -19,7 +19,7 @@
     </md-select>
   </div>
   <md-card class="post-card" ng-repeat="post in posts">
-    <img src="images/books/{{post.book.isbn}}.jpg" class="md-card-image post-book-image">
+    <img src="images/books/{{post.book.image || 'not-available.jpg'}}" class="md-card-image post-book-image">
     <md-card-title>
       <md-card-title-text>
         <span class="post-book-title">{{post.book.title}}</span>

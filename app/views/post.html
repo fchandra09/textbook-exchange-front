@@ -3,7 +3,7 @@
 
   <md-card class="book-card" layout="row">
     <div flex="none" layout="column" layout-align="center center" class="cover-image-container">
-      <img src="images/books/{{book.isbn}}.jpg" class="md-card-image flex-image">
+      <img src="images/books/{{book.image || 'not-available.jpg'}}" class="md-card-image flex-image">
     </div>
     <div flex="grow" layout="column">
       <md-card-title flex="none">

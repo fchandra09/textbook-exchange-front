@@ -7,7 +7,13 @@ angular.module('textbookExchangeApp')
   var limit = 20;
 
   var getPosts = function() {
-    Posts.getAll({'limit': limit, 'skip': (page - 1) * limit}).then(function(response) {
+    Posts.getAll({
+      limit: limit,
+      skip: (page - 1) * limit,
+      where: {
+        active: true
+      }
+    }).then(function(response) {
       // If API goes past the last page, go back
       if (response.data.data.length === 0) {
         page -= 1;
