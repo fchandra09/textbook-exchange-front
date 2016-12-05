@@ -3,26 +3,31 @@
   <div layout="row" layout-align="space-between">
     <md-input-container flex="100" flex-gt-sm="45" flex-gt-md="30">
       <label>Search</label>
-      <input ng-model="searchQuery" />
+      <input ng-model="searchQuery" ng-model-options="{ debounce: 1000 }" ng-change="refreshPost()" placeholder="Title, Author, Course, or ISBN" />
     </md-input-container>
     <md-input-container flex="100" flex-gt-sm="45" flex-gt-md="30">
       <label>Sort By</label>
       <md-select ng-model="sortBy" ng-change="refreshPost()">
         <md-option value="1">Price: Low to High</md-option>
         <md-option value="2">Price: High to Low</md-option>
+        <md-option value="3">Title: A to Z</md-option>
+        <md-option value="4">Title: Z to A</md-option>
+        <md-option value="5">Author: A to Z</md-option>
+        <md-option value="6">Author: Z to A</md-option>
       </md-select>
     </md-input-container>
   </div>
   <md-card class="post-card" ng-repeat="post in posts">
-    <img src="images/books/{{post.book.image || 'not-available.jpg'}}" class="md-card-image post-book-image">
+    <img src="images/books/{{post.image || 'not-available.jpg'}}" class="md-card-image post-book-image">
     <md-card-title>
       <md-card-title-text>
-        <span class="post-book-title">{{post.book.title}}</span>
+        <span class="post-book-title">{{post.title}}</span>
       </md-card-title-text>
     </md-card-title>
     <md-card-content>
-      <p class="hanging-indent">Authors: {{post.book.authors}}</p>
-      <p class="hanging-indent">Classes: <span ng-repeat="course in post.book.courses">{{course}}<span ng-if="!$last">, </span></span></p>
+      <p class="hanging-indent">Authors: {{post.authors}}</p>
+      <p class="hanging-indent">ISBN: {{post.isbn}}</p>
+      <p class="hanging-indent">Classes: <span ng-repeat="course in post.courses">{{course}}<span ng-if="!$last">, </span></span></p>
       <p class="hanging-indent">Condition: {{post.condition}}</p>
     </md-card-content>
     <md-card-actions class="post-button" layout="row" layout-align="end end">
@@ -31,9 +36,9 @@
       <md-button class="md-raised md-primary md-button md-ink-ripple detail-button" ng-click="goToBookDetail(post._id)">Details</md-button>
     </md-card-actions>
   </md-card>
-  <div class="nav-row" layout="row" layout-align="end end">
+  <div class="nav-row" layout="row" layout-align="center center">
     <md-button class="md-raised md-primary md-button md-ink-ripple nav-button" ng-click="previousPage()" ng-disabled="page === 1">Previous</md-button>
-    <span flex></span>
-    <md-button class="md-raised md-primary md-button md-ink-ripple nav-button" ng-click="nextPage()">Next</md-button>
+    <span flex layout="row" layout-align="center">{{start}} - {{end}} out of {{recordsCount}}</span>
+    <md-button class="md-raised md-primary md-button md-ink-ripple nav-button" ng-click="nextPage()" ng-disabled="end <= recordsCount">Next</md-button>
   </div>
 </section>

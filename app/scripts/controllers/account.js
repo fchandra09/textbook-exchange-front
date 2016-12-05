@@ -15,12 +15,6 @@ angular.module('textbookExchangeApp')
 
   Posts.getAll({ where: {sellerId: userId } }).then(function(response) {
     $scope.posts = response.data.data;
-
-    angular.forEach($scope.posts, function(post) {
-      Books.get(post.bookId).then(function(response) {
-        post.book = response.data.data;
-      });
-    });
   });
 
   var message = function(message) {

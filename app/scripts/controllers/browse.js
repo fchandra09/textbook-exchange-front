@@ -7,6 +7,9 @@ angular.module('textbookExchangeApp')
   $scope.page = 1;
   $scope.sortBy = '1';
   $scope.searchQuery = '';
+  $scope.recordsCount = 0;
+  $scope.start = 0;
+  $scope.end = 0;
 
   var getPosts = function() {
     var sort = {};
@@ -16,36 +19,66 @@ angular.module('textbookExchangeApp')
         break;
       case "2":
         sort = { price: -1 };
+        break;
+      case "3":
+        sort = { title: 1 };
+        break;
+      case "4":
+        sort = { title: -1 };
+        break;
+      case "5":
+        sort = { authors: 1 };
+        break;
+      case "6":
+        sort = { authors: -1 };
+        break;
     }
 
-    Posts.getAll({
+    var params = {
       limit: limit,
       skip: ($scope.page - 1) * limit,
       where: {
         active: true
       },
       sort: sort
-    }).then(function(response) {
-      // If API goes past the last page, go back
-      if (response.data.data.length === 0) {
-        $scope.page -= 1;
-        getPosts();
-        return;
-      }
+    };
 
+    if ($scope.searchQuery) {
+      var likeSearch = {
+        '$regex': '.*' + $scope.searchQuery + '.*',
+        '$options': 'i'
+      };
+
+      params.where = {
+        active: true,
+        '$or': [
+          { title: likeSearch },
+          { authors: likeSearch },
+          { courses: likeSearch },
+          { isbn: $scope.searchQuery }
+        ]
+      };
+    }
+
+    Posts.getAll(params)
+    .then(function(response) {
       $scope.posts = response.data.data;
+    });
 
-      angular.forEach($scope.posts, function(post) {
-        Books.get(post.bookId).then(function(response) {
-          post.book = response.data.data;
-        });
-      });
-    }, function(errorResponse) {
-      $mdToast.show(
-        $mdToast.simple()
-          .textContent(errorResponse.data.message)
-          .hideDelay(5000)
-      );
+    var countParams = {
+      count: true
+    };
+    countParams.where = params.where;
+    Posts.getAll(countParams)
+    .then(function(response) {
+      $scope.recordsCount = response.data.data;
+      if ($scope.recordsCount > 0) {
+        $scope.start = ($scope.page - 1) * limit + 1;
+        $scope.end = $scope.page * limit;
+        if ($scope.end > $scope.recordsCount) {
+          $scope.end = $scope.recordsCount;
+        }
+      }
     });
   };
 
