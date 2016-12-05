@@ -9,6 +9,7 @@ angular.module('textbookExchangeApp')
 
   $scope.post = {
     bookId: $routeParams.bookId,
+    condition: 'New',
     existing: false,
     selectedTrades: {}
   };

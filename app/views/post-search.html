@@ -16,21 +16,21 @@
         <input type="text" id="authors" ng-model="filter.authors" />
       </md-input-container>
       <div layout="row" layout-align="center">
-        <md-button class="md-raised" ng-click="searchBooks()">Search</md-button>
+        <md-button class="md-raised md-primary md-button md-ink-ripple" ng-click="searchBooks()">Search</md-button>
       </div>
     </div>
     <div flex="100" flex-gt-sm="50" ng-show="multiple">
       <span>Books you have selected</span>
       <md-list class="list" flex="grow">
         <md-list-item class="list-item" ng-repeat="book in selectedTrades">
-          <div flex="grow">{{book.title}}</div>
           <div flex>
-            <md-icon class="column" ng-click="removeSelectedBook(book._id)" md-font-library="material-icons">delete</md-icon>
+            <md-icon class="column remove-trade" ng-click="removeSelectedBook(book._id)" md-font-library="material-icons">delete</md-icon>
           </div>
+          <div flex="grow">{{book.title}}</div>
         </md-list-item>
       </md-list>
       <div layout="row" layout-align="center">
-        <md-button class="md-raised" ng-click="goBackToPost()">Done</md-button>
+        <md-button class="md-raised md-primary md-button md-ink-ripple" ng-click="goBackToPost()">Done</md-button>
       </div>
     </div>
   </div>
@@ -51,7 +51,7 @@
         <p>Classes: {{book.courses.join(', ')}}</p>
       </md-card-content>
       <md-card-actions class="book-button" layout="row" layout-align="end end" flex="none">
-        <md-button class="md-raised" ng-click="selectBook(book._id, book.title)">Select</md-button>
+        <md-button class="md-raised md-primary md-button md-ink-ripple" ng-click="selectBook(book._id, book.title)">Select</md-button>
       </md-card-actions>
     </div>
   </md-card>

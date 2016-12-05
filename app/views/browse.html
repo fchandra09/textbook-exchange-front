@@ -28,12 +28,12 @@
     <md-card-actions class="post-button" layout="row" layout-align="end end">
       <span class="md-title">{{post.price | currency}}</span>
       <span flex></span>
-      <md-button class="md-raised md-primary detail-button" ng-click="goToBookDetail(post._id)">Details</md-button>
+      <md-button class="md-raised md-primary md-button md-ink-ripple detail-button" ng-click="goToBookDetail(post._id)">Details</md-button>
     </md-card-actions>
   </md-card>
   <div class="nav-row" layout="row" layout-align="end end">
-    <md-button class="md-raised nav-button" ng-click="previousPage()" ng-disabled="page === 1">Previous</md-button>
+    <md-button class="md-raised md-primary md-button md-ink-ripple nav-button" ng-click="previousPage()" ng-disabled="page === 1">Previous</md-button>
     <span flex></span>
-    <md-button class="md-raised nav-button" ng-click="nextPage()">Next</md-button>
+    <md-button class="md-raised md-primary md-button md-ink-ripple nav-button" ng-click="nextPage()">Next</md-button>
   </div>
 </section>

@@ -1,33 +1,35 @@
 <section class="account-container">
-  <md-card class="edit-account-card">
-    <md-card-title>
-      <span class="md-headline">Edit Account Details</span>
-    </md-card-title>
-    <md-card-content>
-      <form name="loginForm">
-        <md-input-container class="md-block" ng-if="!showLogin">
-          <label>Name</label>
-          <input ng-model="user.name" name="name">
-        </md-input-container>
-        <md-input-container class="md-block">
-          <label>Email</label>
-          <input ng-model="user.email" name="email">
-        </md-input-container>
-        <md-input-container class="md-block">
-          <label>New Password</label>
-          <input ng-model="user.newPassword" name="newPassword" type="password">
-        </md-input-container>
-        <md-input-container class="md-block">
-          <label>Confirm New Password</label>
-          <input ng-model="user.confirmNewPassword" name="confirmNewPassword" type="password">
-        </md-input-container>
-      </form>
-    </md-card-content>
-    <md-card-actions layout="row" layout-align="end center">
-      <span flex></span>
-      <md-button class="md-primary" ng-click="updateAccount()">Update Account</md-button>
-    </md-card-actions>
-  </md-card>
+  <h3>Edit Account Details</h3>
+  <div layout="row">
+    <form name="loginForm" ng-submit="updateAccount()" novalidate flex="100" flex-gt-sm="50" layout="column">
+      <md-input-container>
+        <label for="name">Name</label>
+        <input id="name" name="name" ng-model="user.name" required>
+        <div ng-messages="loginForm.name.$error" class="md-input-messages-animation md-auto-hide" >
+          <div ng-message="required">Name is required.</div>
+        </div>
+      </md-input-container>
+      <md-input-container>
+        <label for="email">Email</label>
+        <input id="email" name="email" ng-model="user.email" required>
+        <div ng-messages="loginForm.email.$error" class="md-input-messages-animation md-auto-hide" >
+          <div ng-message="required">Email is required.</div>
+          <div ng-message="email">Please enter a valid email.</div>
+        </div>
+      </md-input-container>
+      <md-input-container>
+        <label>New Password</label>
+        <input ng-model="user.newPassword" name="newPassword" type="password">
+      </md-input-container>
+      <md-input-container>
+        <label>Confirm New Password</label>
+        <input ng-model="user.confirmNewPassword" name="confirmNewPassword" type="password">
+      </md-input-container>
+      <div layout="row" layout-align="center">
+        <md-button type="submit" class="md-raised md-primary md-button md-ink-ripple" ng-disabled="loginForm.$invalid">Update Account</md-button>
+      </div>
+    </form>
+  </div>
 
   <h3 class="posts-header">My Posts</h3>
   <md-card class="post-card" ng-repeat="post in posts">
@@ -46,7 +48,7 @@
     <md-card-actions class="post-button" layout="row" layout-align="end end">
       <span class="md-title">{{post.price | currency}}</span>
       <span flex></span>
-      <md-button class="md-raised md-primary detail-button" ng-click="goToBookDetail(post._id)">Details</md-button>
+      <md-button class="md-raised md-primary md-button md-ink-ripple detail-button" ng-click="goToBookDetail(post._id)">Details</md-button>
     </md-card-actions>
   </md-card>
 </section>

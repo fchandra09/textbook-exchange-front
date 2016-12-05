@@ -53,6 +53,10 @@ angular.module('textbookExchangeApp')
     delete $scope.post.selectedTrades[bookId];
   };
 
+  $scope.cancelPost = function() {
+    $location.path('/view/' + $routeParams.postId);
+  };
+
   $scope.submitPost = function() {
     $scope.post.active = ($scope.post.status === '1' ? true : false);
     $scope.post.trades = Object.keys($scope.post.selectedTrades);

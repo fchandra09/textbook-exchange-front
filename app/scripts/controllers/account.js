@@ -32,6 +32,8 @@ angular.module('textbookExchangeApp')
   };
 
   $scope.updateAccount = function() {
+    var proceed = true;
+
     if ($scope.user.newPassword) {
       if ($scope.user.newPassword !== $scope.user.confirmNewPassword) {
         $mdToast.show(
@@ -39,19 +41,16 @@ angular.module('textbookExchangeApp')
             .textContent('Password does not match!')
             .hideDelay(5000)
         );
+        proceed = false;
       } else {
         $scope.user.password = $scope.user.newPassword;
       }
     }
 
-    if (!$scope.user.email) {
-      message('Email is required!');
-    } else if (!$scope.user.name) {
-      message('Name is required!');
-    } else {
-      Users.put(userId, $scope.user).then(function() {
+    if (proceed) {
+      Users.put(userId, $scope.user).then(function () {
         message('User updated!');
-      }, function(response) {
+      }, function (response) {
         message(response.data.message);
       });
     }
