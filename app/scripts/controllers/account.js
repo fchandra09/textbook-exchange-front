@@ -13,7 +13,7 @@ angular.module('textbookExchangeApp')
     $scope.user = response.data.data;
   });
 
-  Posts.getAll({ sellerid: userId }).then(function(response) {
+  Posts.getAll({ where: {sellerId: userId } }).then(function(response) {
     $scope.posts = response.data.data;
 
     angular.forEach($scope.posts, function(post) {
