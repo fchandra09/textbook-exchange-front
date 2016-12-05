@@ -48,6 +48,10 @@ angular
         templateUrl: 'views/view.html',
         controller: 'ViewCtrl'
       })
+      .when('/account', {
+        templateUrl: 'views/account.html',
+        controller: 'AccountCtrl'
+      })
       .otherwise({
         redirectTo: '/browse'
       });
