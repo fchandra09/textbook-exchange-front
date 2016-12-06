@@ -11,6 +11,7 @@ angular.module('textbookExchangeApp')
 
   Users.get(userId).then(function(response) {
     $scope.user = response.data.data;
+    delete $scope.user.password;
   });
 
   Posts.getAll({ where: {sellerId: userId } }).then(function(response) {

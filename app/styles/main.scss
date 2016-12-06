@@ -265,3 +265,9 @@ md-input-container.md-input-has-value label:not(.md-no-float) {
     margin: 0 8px 8px;
   }
 }
+
+body {
+  > md-toast { // the ">" selector selects only immediate descendants of...
+    position: fixed;
+  }
+}

@@ -2,7 +2,7 @@
 
 angular.module('textbookExchangeApp')
 
-.controller('PostSearchCtrl', function($scope, $location, $window, Books, PostData, extraParams) {
+.controller('PostSearchCtrl', function($scope, $location, $window, $mdToast, Books, PostData, extraParams) {
   $scope.multiple = extraParams.multiple;
   $scope.filter = {};
 
@@ -89,6 +89,12 @@ angular.module('textbookExchangeApp')
         '_id': bookId,
         title: title
       };
+
+      $mdToast.show(
+        $mdToast.simple()
+          .textContent(title + ' has been selected')
+          .hideDelay(2500)
+      );
     };
 
     $scope.removeSelectedBook = function(bookId) {
