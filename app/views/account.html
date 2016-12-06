@@ -25,9 +25,14 @@
         <label>Confirm New Password</label>
         <input ng-model="user.confirmNewPassword" name="confirmNewPassword" type="password">
       </md-input-container>
+      <md-input-container>
+        <label for="phone">Phone</label>
+        <input id="phone" name="phone" ng-model="user.phone" />
+      </md-input-container>
       <div layout="row" layout-align="center">
         <md-button type="submit" class="md-raised md-primary md-button md-ink-ripple" ng-disabled="loginForm.$invalid">Update Account</md-button>
       </div>
+
     </form>
   </div>
 

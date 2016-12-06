@@ -1,30 +1,77 @@
 <section class="login-container">
-  <md-card class="login-card">
-    <md-card-title>
-      <span class="md-headline">Login</span>
-    </md-card-title>
-    <md-card-content>
-      <form name="loginForm">
-        <md-input-container class="md-block" ng-if="!showLogin">
-          <label>Name</label>
-          <input ng-model="user.name" name="name">
+  <div ng-show="showLogin">
+    <div layout="row">
+      <form name="loginForm" ng-submit="login()" novalidate flex="100" flex-gt-sm="50" layout="column">
+        <div layout="row" layout-align="space-between center">
+          <h2 class="page-title">Login</h2>
+          <md-button class="md-primary" ng-click="goToRegister()">Go to Register</md-button>
+        </div>
+        <md-input-container>
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" ng-model="user.email" required />
+          <div ng-messages="loginForm.email.$error" class="md-input-messages-animation md-auto-hide">
+            <div ng-message="required">Email is required.</div>
+            <div ng-message="email">Please enter a valid email.</div>
+          </div>
         </md-input-container>
-        <md-input-container class="md-block">
-          <label>Email</label>
-          <input ng-model="user.email" name="email">
+        <md-input-container>
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" ng-model="user.password" required />
+          <div ng-messages="loginForm.password.$error" class="md-input-messages-animation md-auto-hide">
+            <div ng-message="required">Password is required.</div>
+          </div>
         </md-input-container>
-        <md-input-container class="md-block">
-          <label>Password</label>
-          <input ng-model="user.password" name="password" type="password">
-        </md-input-container>
+        <div layout="row" layout-align="center">
+          <md-button type="submit" class="md-raised md-primary md-button md-ink-ripple" ng-disabled="loginForm.$invalid">Login</md-button>
+        </div>
       </form>
-    </md-card-content>
-    <md-card-actions layout="row" layout-align="end center">
-      <md-button class="md-primary" ng-if="showLogin" ng-click="goToRegister()">Go to Register</md-button>
-      <md-button class="md-primary" ng-if="!showLogin" ng-click="goToLogin()">Go to Login</md-button>
-      <span flex></span>
-      <md-button class="md-raised md-primary md-button md-ink-ripple" ng-if="showLogin" ng-click="login()">Login</md-button>
-      <md-button class="md-raised md-primary md-button md-ink-ripple" ng-if="!showLogin" ng-click="register()">Register</md-button>
-    </md-card-actions>
-  </md-card>
+    </div>
+  </div>
+
+  <div ng-show="!showLogin">
+    <div layout="row">
+      <form name="registerForm" ng-submit="register()" novalidate flex="100" flex-gt-sm="50" layout="column">
+        <div layout="row" layout-align="space-between center">
+          <h2 class="page-title">Register</h2>
+          <md-button class="md-primary" ng-click="goToLogin()">Go to Login</md-button>
+        </div>
+        <md-input-container>
+          <label for="name">Name</label>
+          <input id="name" name="name" ng-model="newUser.name" required />
+          <div ng-messages="registerForm.name.$error" class="md-input-messages-animation md-auto-hide">
+            <div ng-message="required">Name is required.</div>
+          </div>
+        </md-input-container>
+        <md-input-container>
+          <label for="registerEmail">Email</label>
+          <input type="email" id="registerEmail" name="email" ng-model="newUser.email" required />
+          <div ng-messages="registerForm.email.$error" class="md-input-messages-animation md-auto-hide">
+            <div ng-message="required">Email is required.</div>
+            <div ng-message="email">Please enter a valid email.</div>
+          </div>
+        </md-input-container>
+        <md-input-container>
+          <label for="registerPassword">Password</label>
+          <input type="password" id="registerPassword" name="password" ng-model="newUser.password" required />
+          <div ng-messages="registerForm.password.$error" class="md-input-messages-animation md-auto-hide">
+            <div ng-message="required">Password is required.</div>
+          </div>
+        </md-input-container>
+        <md-input-container>
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" ng-model="newUser.confirmPassword" required />
+          <div ng-messages="registerForm.confirmPassword.$error" class="md-input-messages-animation md-auto-hide">
+            <div ng-message="required">Confirm Password is required.</div>
+          </div>
+        </md-input-container>
+        <md-input-container>
+          <label for="phone">Phone</label>
+          <input id="phone" name="phone" ng-model="newUser.phone" />
+        </md-input-container>
+        <div layout="row" layout-align="center">
+          <md-button type="submit" class="md-raised md-primary md-button md-ink-ripple" ng-disabled="registerForm.$invalid">Register</md-button>
+        </div>
+      </form>
+    </div>
+  </div>
 </section>

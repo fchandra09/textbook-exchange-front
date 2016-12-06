@@ -32,7 +32,7 @@ angular.module('textbookExchangeApp')
       if ($scope.user.newPassword !== $scope.user.confirmNewPassword) {
         $mdToast.show(
           $mdToast.simple()
-            .textContent('Password does not match!')
+            .textContent('Password and confirm password do not match.')
             .hideDelay(5000)
         );
         proceed = false;

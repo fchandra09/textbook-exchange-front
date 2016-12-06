@@ -28,6 +28,7 @@ angular.module('textbookExchangeApp')
 
   $scope.showLogin = true;
   $scope.user = {};
+  $scope.newUser = {};
 
   $scope.goToRegister = function() {
     $scope.showLogin = false;
@@ -38,31 +39,26 @@ angular.module('textbookExchangeApp')
   };
 
   $scope.login = function() {
-    if (!$scope.user.email) {
-      failure('Email is required');
-    } else if (!$scope.user.password) {
-      failure('Password is required!');
-    } else {
-      Users.login($scope.user).then(function(response) {
-        success('Logged in!', response.data.data);
-      }, function(response) {
-        failure(response.data.message);
-      });
-    }
+    Users.login($scope.user).then(function(response) {
+      success('You are successfully logged in.', response.data.data);
+    }, function(response) {
+      failure(response.data.message || "Unable to login. Email and/or password are incorrect.");
+    });
   };
 
   $scope.register = function() {
-    if (!$scope.user.email) {
-      failure('Email is required');
-    } else if (!$scope.user.password) {
-      failure('Password is required!');
-    } else if (!$scope.user.name) {
-      failure('Name is requried');
-    } else {
-      Users.register($scope.user).then(function(response) {
-        success('Registered!', response.data.data);
-      }, function(response) {
-        failure(response.data.message);
+    if ($scope.newUser.password !== $scope.newUser.confirmPassword) {
+      $mdToast.show(
+        $mdToast.simple()
+          .textContent('Password and confirm password do not match.')
+          .hideDelay(5000)
+      );
+    }
+    else {
+      Users.register($scope.newUser).then(function (response) {
+        success('You are successfully registered.', response.data.data);
+      }, function (response) {
+        failure(response.data.message || "Unable to register. Email has already been registered.");
       });
     }
   };
