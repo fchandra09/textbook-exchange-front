@@ -1,7 +1,21 @@
 <section class="post-search-container">
-  <h3>Post a Book</h3>
-  <div layout="row">
-    <div flex="100" flex-gt-sm="50" layout="column">
+  <h2 class="page-title">Post a Book</h2>
+  <div layout="column" layout-gt-sm="row" layout-align-gt-sm="space-between end">
+    <div flex="100" flex-gt-sm="50" ng-show="multiple" flex-order-gt-sm="2">
+      <div style="margin-bottom: 10px">Books you have selected</div>
+      <md-list class="list trade-list" flex="grow">
+        <md-list-item class="list-item" ng-repeat="book in selectedTrades">
+          <div flex>
+            <md-icon class="column remove-trade" ng-click="removeSelectedBook(book._id)" md-font-library="material-icons">delete</md-icon>
+          </div>
+          <div flex="grow">{{book.title}}</div>
+        </md-list-item>
+      </md-list>
+      <div layout="row" layout-align="center">
+        <md-button class="md-raised md-primary md-button md-ink-ripple" ng-click="goBackToPost()">Done</md-button>
+      </div>
+    </div>
+    <div flex="100" flex-gt-sm="40" layout="column" flex-order-gt-sm="1">
       <md-input-container>
         <label for="isbn">ISBN</label>
         <input type="text" id="isbn" ng-model="filter.isbn" />
@@ -19,40 +33,28 @@
         <md-button class="md-raised md-primary md-button md-ink-ripple" ng-click="searchBooks()">Search</md-button>
       </div>
     </div>
-    <div flex="100" flex-gt-sm="50" ng-show="multiple">
-      <span>Books you have selected</span>
-      <md-list class="list" flex="grow">
-        <md-list-item class="list-item" ng-repeat="book in selectedTrades">
-          <div flex>
-            <md-icon class="column remove-trade" ng-click="removeSelectedBook(book._id)" md-font-library="material-icons">delete</md-icon>
-          </div>
-          <div flex="grow">{{book.title}}</div>
-        </md-list-item>
-      </md-list>
-      <div layout="row" layout-align="center">
-        <md-button class="md-raised md-primary md-button md-ink-ripple" ng-click="goBackToPost()">Done</md-button>
-      </div>
-    </div>
   </div>
 
-  <md-card class="book-card" ng-repeat="book in books" layout="row">
-    <div flex="none" layout="column" layout-align="center center" class="cover-image-container">
-      <img src="images/books/{{book.image || 'not-available.jpg'}}" class="md-card-image flex-image">
-    </div>
-    <div flex="grow" layout="column">
-      <md-card-title flex="none">
-        <md-card-title-text>
-          <span class="md-headline">{{book.title}}</span>
-        </md-card-title-text>
-      </md-card-title>
-      <md-card-content flex="grow">
-        <p>Authors: {{book.authors}}</p>
-        <p>ISBN: {{book.isbn}}</p>
-        <p>Classes: {{book.courses.join(', ')}}</p>
-      </md-card-content>
-      <md-card-actions class="book-button" layout="row" layout-align="end end" flex="none">
-        <md-button class="md-raised md-primary md-button md-ink-ripple" ng-click="selectBook(book._id, book.title)">Select</md-button>
-      </md-card-actions>
-    </div>
-  </md-card>
+  <div class="post-card-container" ng-repeat="book in books">
+    <md-card class="post-card" layout="row" layout-align-gt-xs="start center">
+      <div flex="none" layout="column" layout-align="center center" class="cover-image-container">
+        <img src="images/books/{{book.image || 'not-available.jpg'}}" class="md-card-image flex-image">
+      </div>
+      <div flex="grow" layout="column">
+        <md-card-title flex="none" class="card-title">
+          <md-card-title-text>
+            <div class="md-headline">{{book.title}}</div>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content flex="grow" class="card-content">
+          <p>Authors: {{book.authors}}</p>
+          <p>ISBN: {{book.isbn}}</p>
+          <p>Classes: {{book.courses.join(', ')}}</p>
+        </md-card-content>
+        <md-card-actions class="book-button" layout="row" layout-align="end end" flex="none">
+          <md-button class="md-raised md-primary md-button md-ink-ripple" ng-click="selectBook(book._id, book.title)">Select</md-button>
+        </md-card-actions>
+      </div>
+    </md-card>
+  </div>
 </section>

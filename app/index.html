@@ -23,37 +23,46 @@
 
     <!-- Add your site or application content here -->
     <div id="site-wrapper">
-        <section class="header">
-            <md-toolbar class="md-hue-2">
-              <div class="md-toolbar-tools">
-                <div>Textbook Exchange</div>
-                <span flex></span>
-                <md-button class="nav-button" ng-click="goToView('browse')">Browse</md-button>
-                <md-button class="nav-button" ng-if="$root.loggedIn()" ng-click="goToView('post-search')">Post a Book</md-button>
-                <md-button class="nav-button" ng-if="$root.loggedIn()" ng-click="goToView('account')">My Account</md-button>
-                <md-button class="nav-button" ng-if="$root.loggedIn()" ng-click="logout()">Logout</md-button>
-                <md-button class="nav-button" ng-if="!$root.loggedIn()" ng-click="goToView('login')">Register/Login</md-button>
-              </div>
-            </md-toolbar>
-        </section>
-
-        <md-content class="container">
-            <div ng-view=""></div>
-        </md-content>
-
-        <div class="footer" layout="row" layout-align="end end"  md-colors="::{backgroundColor: 'default-primary-700'}">
-          <div>
-            <div><a>About</a></div>
-            <div><a>Help</a></div>
-            <div><a>FAQ</a></div>
+      <header>
+        <md-toolbar class="md-hue-2">
+          <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+            <a ng-href="#/browse" class="site-title">Textbook Exchange</a>
+            <div layout="row" hide show-gt-sm>
+              <a ng-click="goToView('browse')" ng-class="{ 'nav-button': true, active: isNavigationActive('/browse') }">Browse</a>
+              <a ng-show="$root.loggedIn()" ng-click="goToView('post-search')" ng-class="{ 'nav-button': true, active: isNavigationActive('/post-search') }">Post a Book</a>
+              <a ng-show="$root.loggedIn()" ng-click="goToView('account')" ng-class="{ 'nav-button': true, active: isNavigationActive('/account') }">My Account</a>
+              <a ng-show="!$root.loggedIn()" ng-click="goToView('login')" ng-class="{ 'nav-button': true, active: isNavigationActive('/login') }">Register/Login</a>
+              <a ng-show="$root.loggedIn()" ng-click="logout()" class="nav-button">Logout</a>
+            </div>
+            <div hide-gt-sm>
+              <md-icon class="column mobile-menu" ng-click="toggleMenu()" md-font-library="material-icons">menu</md-icon>
+            </div>
           </div>
-          <span flex></span>
-          <div>
-            <h3>Contact Us</h3>
-            <div>Textbook Exchange</div>
-            <div>email@email.com</div>
+        </md-toolbar>
+        <md-sidenav md-component-id="sidenav">
+          <div layout="column">
+            <a ng-click="goToView('browse')" ng-class="{ 'nav-button': true, active: isNavigationActive('/browse') }">Browse</a>
+            <a ng-show="$root.loggedIn()" ng-click="goToView('post-search')" ng-class="{ 'nav-button': true, active: isNavigationActive('/post-search') }">Post a Book</a>
+            <a ng-show="$root.loggedIn()" ng-click="goToView('account')" ng-class="{ 'nav-button': true, active: isNavigationActive('/account') }">My Account</a>
+            <a ng-show="!$root.loggedIn()" ng-click="goToView('login')" ng-class="{ 'nav-button': true, active: isNavigationActive('/login') }">Register/Login</a>
+            <a ng-show="$root.loggedIn()" ng-click="logout()" class="nav-button">Logout</a>
           </div>
+        </md-sidenav>
+      </header>
+
+      <md-content class="container">
+          <div ng-view=""></div>
+      </md-content>
+
+      <footer layout="column" layout-gt-xs="row" layout-align-gt-xs="space-between center">
+        <div flex="100" flex-gt-xs="50" class="contact">
+          <h3>Contact Us</h3>
+          <a href="mailto:textbook-exchange@illinois.edu">textbook-exchange@illinois.com</a>
         </div>
+        <div flex="100" flex-gt-xs="50" class="copyright">
+          &copy; 2016 Team Banana Boat
+        </div>
+      </footer>
     </div>
 
     <!-- build:js(.) scripts/vendor.js -->

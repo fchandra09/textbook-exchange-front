@@ -1,5 +1,5 @@
 <section class="account-container">
-  <h3>Edit Account Details</h3>
+  <h2 class="page-title">Edit Account Details</h2>
   <div layout="row">
     <form name="loginForm" ng-submit="updateAccount()" novalidate flex="100" flex-gt-sm="50" layout="column">
       <md-input-container>
@@ -11,7 +11,7 @@
       </md-input-container>
       <md-input-container>
         <label for="email">Email</label>
-        <input id="email" name="email" ng-model="user.email" required>
+        <input id="email" name="email" type="email" ng-model="user.email" required>
         <div ng-messages="loginForm.email.$error" class="md-input-messages-animation md-auto-hide" >
           <div ng-message="required">Email is required.</div>
           <div ng-message="email">Please enter a valid email.</div>
@@ -31,25 +31,31 @@
     </form>
   </div>
 
-  <h3 class="posts-header">My Posts</h3>
-  <md-card class="post-card" ng-repeat="post in posts">
-    <img src="images/books/{{post.image || 'not-available.jpg'}}" class="md-card-image post-book-image">
-    <md-card-title>
-      <md-card-title-text>
-        <span class="post-book-title">{{post.title}}</span>
-      </md-card-title-text>
-    </md-card-title>
-    <md-card-content>
-      <p class="hanging-indent">Authors: {{post.authors}}</p>
-      <p class="hanging-indent">ISBN: {{post.isbn}}</p>
-      <p class="hanging-indent">Classes: <span ng-repeat="course in post.courses">{{course}}<span ng-if="!$last">, </span></span></p>
-      <p class="hanging-indent">Condition: {{post.condition}}</p>
-      <p class="hanging-indent">Status: {{post.active ? 'Unsold' : 'Sold'}}</p>
-    </md-card-content>
-    <md-card-actions class="post-button" layout="row" layout-align="end end">
-      <span class="md-title">{{post.price | currency}}</span>
-      <span flex></span>
-      <md-button class="md-raised md-primary md-button md-ink-ripple detail-button" ng-click="goToBookDetail(post._id)">Details</md-button>
-    </md-card-actions>
-  </md-card>
+  <h2 class="page-title" style="margin-top:20px;">My Posts</h2>
+  <div class="post-card-container" ng-repeat="post in posts">
+    <md-card class="post-card" layout="row" layout-align-gt-xs="start center">
+      <div flex="none" layout="column" layout-align="center center" class="cover-image-container">
+        <img src="images/books/{{post.image || 'not-available.jpg'}}" class="md-card-image flex-image">
+      </div>
+      <div flex="grow" layout="column">
+        <md-card-title flex="none" class="card-title">
+          <md-card-title-text>
+            <div class="md-headline">{{post.title}}</div>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content flex="grow" class="card-content">
+          <p>Authors: {{post.authors}}</p>
+          <p>ISBN: {{post.isbn}}</p>
+          <p>Classes: {{post.courses.join(', ')}}</p>
+          <p>Condition: {{post.condition}}</p>
+          <p>Status: {{post.active ? 'Unsold' : 'Sold'}}</p>
+        </md-card-content>
+        <md-card-actions class="book-button" layout="row" layout-align="end end" flex="none">
+          <span class="md-title">{{post.price | currency}}</span>
+          <span flex></span>
+          <md-button class="md-raised md-primary md-button md-ink-ripple" ng-click="goToBookDetail(post._id)">Details</md-button>
+        </md-card-actions>
+      </div>
+    </md-card>
+  </div>
 </section>
