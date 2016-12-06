@@ -1,17 +1,17 @@
 <section class="post-container">
-  <h3>Post a Book</h3>
+  <h2 class="page-title">Post a Book</h2>
 
-  <md-card class="book-card" layout="row">
+  <md-card class="post-card" layout="row" layout-align-gt-xs="start center">
     <div flex="none" layout="column" layout-align="center center" class="cover-image-container">
       <img src="images/books/{{book.image || 'not-available.jpg'}}" class="md-card-image flex-image">
     </div>
     <div flex="grow" layout="column">
-      <md-card-title flex="none">
+      <md-card-title flex="none" class="card-title">
         <md-card-title-text>
-          <span class="md-headline">{{book.title}}</span>
+          <div class="md-headline">{{book.title}}</div>
         </md-card-title-text>
       </md-card-title>
-      <md-card-content flex="grow">
+      <md-card-content flex="grow" class="card-content">
         <p>Authors: {{book.authors}}</p>
         <p>ISBN: {{book.isbn}}</p>
         <p>Classes: {{book.courses.join(', ')}}</p>
@@ -20,53 +20,61 @@
   </md-card>
 
   <div layout="row">
-    <form name="form" ng-submit="submitPost()" novalidate flex="100" flex-gt-sm="50" layout="column">
-      <md-input-container>
-        <label for="condition">Condition</label>
-        <md-select id="condition" ng-model="post.condition">
-          <md-option value="New">New</md-option>
-          <md-option value="Looks Like New">Looks Like New</md-option>
-          <md-option value="Used / Fair">Used / Fair</md-option>
-          <md-option value="Worn">Worn</md-option>
-        </md-select>
-        <div class="md-errors-spacer"></div>
-      </md-input-container>
-      <md-input-container>
-        <label for="price" class="md-required">Price</label>
-        <input type="number" id="price" name="price" ng-model="post.price" step="1" min="0" required />
-        <div ng-messages="form.price.$error" class="md-input-messages-animation md-auto-hide" >
-          <div ng-message="required">Price is required.</div>
-          <div ng-message-exp="['number', 'min']">Please enter a valid price.</div>
+    <form name="form" ng-submit="submitPost()" novalidate flex="100" layout="column">
+      <div layout="row">
+        <div flex="100" flex-gt-sm="50" layout="column">
+          <md-input-container>
+            <label for="condition">Condition</label>
+            <md-select id="condition" ng-model="post.condition">
+              <md-option value="New">New</md-option>
+              <md-option value="Looks Like New">Looks Like New</md-option>
+              <md-option value="Used / Fair">Used / Fair</md-option>
+              <md-option value="Worn">Worn</md-option>
+            </md-select>
+          </md-input-container>
+          <md-input-container>
+            <label for="price" class="md-required">Price</label>
+            <input type="number" id="price" name="price" ng-model="post.price" step="1" min="0" required />
+            <div ng-messages="form.price.$error" class="md-input-messages-animation md-auto-hide" >
+              <div ng-message="required">Price is required.</div>
+              <div ng-message-exp="['number', 'min']">Please enter a valid price.</div>
+            </div>
+          </md-input-container>
+          <md-input-container ng-show="post.existing">
+            <label for="status">Status</label>
+            <md-select id="status" ng-model="post.status">
+              <md-option value="1">Unsold</md-option>
+              <md-option value="0">Sold</md-option>
+            </md-select>
+            <div class="md-errors-spacer"></div>
+          </md-input-container>
+          <md-input-container class="md-input-has-value trade-label">
+            <label>Trade</label>
+          </md-input-container>
         </div>
-      </md-input-container>
-      <md-input-container ng-show="post.existing">
-        <label for="status">Status</label>
-        <md-select id="status" ng-model="post.status">
-          <md-option value="1">Unsold</md-option>
-          <md-option value="0">Sold</md-option>
-        </md-select>
-        <div class="md-errors-spacer"></div>
-      </md-input-container>
-      <md-input-container class="md-input-has-value">
-        <label>Trade</label>
-        <div layout="row">
-          <md-list class="list" flex="grow">
-            <md-list-item class="list-item" ng-repeat="tradeBook in post.selectedTrades">
-              <div flex>
-                <md-icon class="column remove-trade" ng-click="removeSelectedBook(tradeBook._id)" md-font-library="material-icons">delete</md-icon>
-              </div>
-              <div flex="grow">{{tradeBook.title}}</div>
-            </md-list-item>
-          </md-list>
-          <div flex="none">
-            <md-button class="md-raised md-primary md-button md-ink-ripple" ng-click="searchBooksToTrade()">Search</md-button>
+      </div>
+      <div layout="row" layout-wrap>
+        <div flex="none" layout="column" flex-order-gt-sm="2">
+          <md-button class="md-raised md-primary md-button md-ink-ripple trade-search-button" ng-click="searchBooksToTrade()">Search</md-button>
+        </div>
+        <div flex="100" flex-gt-sm="50" flex-order-gt-sm="1" layout="column">
+          <div layout="column" layout-gt-xs="row">
+            <md-list class="list trade-list" flex="grow">
+              <md-list-item class="list-item" ng-repeat="tradeBook in post.selectedTrades">
+                <div flex>
+                  <md-icon class="column remove-trade" ng-click="removeSelectedBook(tradeBook._id)" md-font-library="material-icons">delete</md-icon>
+                </div>
+                <div flex="grow">{{tradeBook.title}}</div>
+              </md-list-item>
+            </md-list>
           </div>
         </div>
-        <div class="md-errors-spacer"></div>
-      </md-input-container>
-      <div layout="row" layout-align="center">
-        <md-button type="submit" class="md-raised md-primary md-button md-ink-ripple" ng-disabled="form.$invalid">Post</md-button>
-        <md-button class="md-raised md-primary md-button md-ink-ripple" ng-click="cancelPost()" ng-show="post.existing">Cancel</md-button>
+      </div>
+      <div layout="row">
+        <div flex="100" flex-gt-sm="50" layout="row" layout-align="center">
+          <md-button type="submit" class="md-raised md-primary md-button md-ink-ripple" ng-disabled="form.$invalid">Post</md-button>
+          <md-button class="md-raised md-primary md-button md-ink-ripple" ng-click="cancelPost()" ng-show="post.existing">Cancel</md-button>
+        </div>
       </div>
     </form>
   </div>

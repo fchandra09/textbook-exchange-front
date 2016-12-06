@@ -1,17 +1,17 @@
 <section class="post-container">
-  <h3>Post Details</h3>
+  <h2 class="page-title">Post Details</h2>
 
-  <md-card class="book-card" layout="row">
+  <md-card class="post-card" layout="row" layout-align-gt-xs="start center">
     <div flex="none" layout="column" layout-align="center center" class="cover-image-container">
       <img src="images/books/{{book.image || 'not-available.jpg'}}" class="md-card-image flex-image">
     </div>
     <div flex="grow" layout="column">
-      <md-card-title flex="none">
+      <md-card-title flex="none" class="card-title">
         <md-card-title-text>
-          <span class="md-headline">{{book.title}}</span>
+          <div class="md-headline">{{book.title}}</div>
         </md-card-title-text>
       </md-card-title>
-      <md-card-content flex="grow">
+      <md-card-content flex="grow" class="card-content">
         <p>Authors: {{book.authors}}</p>
         <p>ISBN: {{book.isbn}}</p>
         <p>Classes: {{book.courses.join(', ')}}</p>
@@ -19,37 +19,37 @@
     </div>
   </md-card>
 
-  <md-input-container layout="column">
-    <md-input-container class="md-input-has-value">
-      <label>Seller</label>
-      <p>{{seller.name}}</p>
-    </md-input-container>
-    <md-input-container class="md-input-has-value">
-      <label>Condition</label>
-      <p>{{post.condition}}</p>
-    </md-input-container>
-    <md-input-container class="md-input-has-value">
-      <label>Price</label>
-      <p>{{post.price | currency}}</p>
-    </md-input-container>
-    <md-input-container class="md-input-has-value">
-      <label>Status</label>
-      <p>{{post.active ? 'Unsold' : 'Sold'}}</p>
-    </md-input-container>
-    <md-input-container class="md-input-has-value" ng-show="trades.length">
-      <label>Trade</label>
-      <div flex="100" flex-gt-sm="75" flex-gt-md="50">
-        <md-card class="trade-card" layout="row" ng-repeat="tradeBook in trades">
+  <div layout="column">
+    <div layout="row" class="detail-row">
+      <div flex="25" flex-gt-xs="15" flex-gt-sm="10" class="detail-label">Seller:</div>
+      <div flex="75" flex-gt-xs="85" flex-gt-sm="90">{{seller.name}}</div>
+    </div>
+    <div layout="row" class="detail-row">
+      <div flex="25" flex-gt-xs="15" flex-gt-sm="10" class="detail-label">Condition:</div>
+      <div flex="75" flex-gt-xs="85" flex-gt-sm="90">{{post.condition}}</div>
+    </div>
+    <div layout="row" class="detail-row">
+      <div flex="25" flex-gt-xs="15" flex-gt-sm="10" class="detail-label">Price:</div>
+      <div flex="75" flex-gt-xs="85" flex-gt-sm="90">{{post.price | currency}}</div>
+    </div>
+    <div layout="row" class="detail-row">
+      <div flex="25" flex-gt-xs="15" flex-gt-sm="10" class="detail-label">Status:</div>
+      <div flex="75" flex-gt-xs="85" flex-gt-sm="90">{{post.active ? 'Unsold' : 'Sold'}}</div>
+    </div>
+    <div layout="row" class="detail-row" ng-show="trades.length" layout-wrap>
+      <div flex="25" flex-gt-xs="15" flex-gt-sm="10" class="detail-label">Trade:</div>
+      <div flex="100" flex-gt-sm="75">
+        <md-card class="post-card trade-card" layout="row" layout-align-gt-xs="start center" ng-repeat="tradeBook in trades">
           <div flex="none" layout="column" layout-align="center center" class="cover-image-container">
             <img src="images/books/{{tradeBook.image || 'not-available.jpg'}}" class="md-card-image flex-image">
           </div>
           <div flex="grow" layout="column">
-            <md-card-title flex="none">
+            <md-card-title flex="none" class="card-title">
               <md-card-title-text>
-                <span class="md-headline">{{tradeBook.title}}</span>
+                <div class="md-headline">{{tradeBook.title}}</div>
               </md-card-title-text>
             </md-card-title>
-            <md-card-content flex="grow">
+            <md-card-content flex="grow" class="card-content">
               <p>Authors: {{tradeBook.authors}}</p>
               <p>ISBN: {{tradeBook.isbn}}</p>
               <p>Classes: {{tradeBook.courses.join(', ')}}</p>
@@ -57,13 +57,15 @@
           </div>
         </md-card>
       </div>
-    </md-input-container>
-  </md-input-container>
+    </div>
+  </div>
 
-  <div layout="row" layout-align="center">
+  <div layout="row" layout-align="center" layout-wrap>
     <md-button ng-show="isSeller && post.active" class="md-raised md-primary md-button md-ink-ripple" ng-click="markAsSold()">Mark as Sold</md-button>
     <md-button ng-show="isSeller" class="md-raised md-primary md-button md-ink-ripple" ng-click="editPost()">Edit</md-button>
-    <md-button ng-show="isSeller" class="md-raised md-warn md-hue-2 md-button md-ink-ripple" ng-click="deletePost()">Delete</md-button>
+    <div flex-xs="100" layout-xs="row" layout-align-xs="center">
+      <md-button ng-show="isSeller" class="md-raised md-warn md-hue-2 md-button md-ink-ripple" ng-click="deletePost()">Delete</md-button>
+    </div>
     <md-button ng-show="isPotentialBuyer && post.active" class="md-raised md-primary md-button md-ink-ripple" ng-click="contactSeller()">Contact Seller</md-button>
   </div>
 </section>

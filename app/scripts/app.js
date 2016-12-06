@@ -60,14 +60,17 @@ angular
         redirectTo: '/browse'
       });
   })
-  .run(function($location, $rootScope, $window, Users) {
+  .run(function($location, $rootScope, $window, $mdSidenav, Users) {
     $rootScope.loggedIn = function() {
       var userId = $window.localStorage.getItem('userId');
       return (userId ? true : false);
     };
+
     $rootScope.goToView = function(view) {
       $location.path(view);
+      $mdSidenav('sidenav').close();
     };
+
     $rootScope.logout = function() {
       Users.logout()
       .then(function() {
@@ -75,4 +78,12 @@ angular
         $location.path('/browse');
       });
     };
+
+    $rootScope.isNavigationActive = function(viewLocation) {
+      return (viewLocation === $location.path());
+    }
+
+    $rootScope.toggleMenu = function() {
+      $mdSidenav('sidenav').toggle();
+    }
   });
