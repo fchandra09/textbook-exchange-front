@@ -1,4 +1,4 @@
-# Textbook Exchange
+# Textbook Exchange (Front-End)
 
 *University of Illinois at Urbana-Champaign  
 The Art of Web Programming (CS498RK) Fall 2016 Final Project*  
