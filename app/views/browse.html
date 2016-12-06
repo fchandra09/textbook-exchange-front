@@ -3,7 +3,7 @@
   <div layout="column" layout-gt-xs="row" layout-align-gt-xs="space-between">
     <md-input-container flex="100" flex-gt-xs="45" flex-gt-sm="30">
       <label>Search</label>
-      <input ng-model="searchQuery" ng-model-options="{ debounce: 1000 }" ng-change="refreshPost()" placeholder="Title, Author, Course, or ISBN" />
+      <input ng-model="searchQuery" ng-model-options="{ debounce: 500 }" ng-change="refreshPost()" placeholder="Title, Author, Course, or ISBN" />
     </md-input-container>
     <span flex-gt-sm="30" show-gt-sm></span>
     <md-input-container flex="100" flex-gt-xs="45" flex-gt-sm="30">
